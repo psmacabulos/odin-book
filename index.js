@@ -38,19 +38,52 @@ function addBookToLibrary() {}
 const main = document.querySelector('main');
 
 function createBooks(books) {
-  return myLibrary.map(
-    (book) => `
-     <article class="card">
+  let booksLibrary = '';
+  books.map(
+    (book) =>
+      (booksLibrary += `<article class="card">
           <div class="box">
             <h3 class="title">${book.title}</h3>
-            <p class="author">Patrick Macabulos</p>
-            <p class="pages">153 pages</p>
-            <button class="readingStatus">Finished Reading ?</button>
+            <p class="author">${book.author}</p>
+            <p class="pages">${book.pageNo}</p>
+            <button class=${
+              book.readTheBook ? 'readingStatusYes' : 'readingStatusNo'
+            }>${
+        book.readTheBook ? 'Finished Reading' : 'Not Finished Reading'
+      }</button>
             <button class="delete">Delete Book</button>
           </div>
-        </article>
-  `
+      </article>`)
   );
+  main.innerHTML = booksLibrary;
 }
+createBooks(myLibrary);
+/* Open the modal */
+const openModal = document.querySelector('.open-modal');
+const modal = document.querySelector('.modal');
+const submit = document.querySelector('#submit');
 
-main.innerHTML = createBooks(myLibrary);
+openModal.addEventListener('click', () => {
+  modal.showModal();
+});
+
+/* Submit the form */
+const form = document.querySelector('form');
+form.addEventListener('submit', () => {
+  const optionStatus = document.querySelector('#readYes:checked');
+  myLibrary = [
+    ...myLibrary,
+    Array.from(
+      document.querySelectorAll('form .input-box .details input')
+    ).reduce(
+      (acc, input) => ({
+        ...acc,
+        [input.id]: input.value,
+      }),
+      {}
+    ),
+  ];
+  myLibrary[myLibrary.length - 1].readTheBook =
+    optionStatus != null ? true : false;
+  createBooks(myLibrary);
+});

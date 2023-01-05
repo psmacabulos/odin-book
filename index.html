@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
-
     <script src="./index.js" defer></script>
     <title>Book</title>
   </head>
@@ -13,10 +12,59 @@
     <div class="container">
       <header>
         <h1>MY LIBRARY</h1>
-        <button class="add">ADD BOOK</button>
+        <button class="open-modal">ADD BOOK</button>
       </header>
+      <dialog class="modal">
+        <form action="#" method="dialog">
+          <h3>Book details</h3>
+          <div class="input-box">
+            <div class="details">
+              <label for="title">*Title</label>
+              <input
+                required
+                type="text"
+                name="title"
+                id="title"
+                title="input the Book Title"
+              />
+            </div>
+            <div class="details">
+              <label for="Author">*Author</label>
+              <input
+                required
+                type="text"
+                name="author"
+                id="author"
+                title="input the Book Author"
+              />
+            </div>
+            <div class="details">
+              <label for="pageNo">*Number of Pages</label>
+              <input
+                required
+                type="number"
+                name="pageNo"
+                id="pageNo"
+                min="1"
+                title="How many Pages?"
+              />
+            </div>
+            <div class="optionBox">
+              <p>Have you read the Book?</p>
+              <div class="form-control">
+                <input type="radio" name="readingStatus" id="readYes" />
+                <label for="readYes">Yes</label>
+
+                <input type="radio" name="readingStatus" id="readNo" />
+                <label for="readNo">No</label>
+              </div>
+            </div>
+            <input id="submit" type="submit" value="Add Book" />
+          </div>
+        </form>
+      </dialog>
       <main></main>
-      <form action="#"></form>
+
       <footer>
         <p>Copyright 2022 Patrick Macabulos</p>
         <p>
