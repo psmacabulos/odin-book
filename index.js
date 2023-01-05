@@ -51,7 +51,7 @@ function createBooks(books) {
             }>${
         book.readTheBook ? 'Finished Reading' : 'Not Finished Reading'
       }</button>
-            <button class="delete">Delete Book</button>
+            <button data-ref= ${index} class="delete">Delete Book</button>
           </div>
       </article>`)
   );
@@ -62,8 +62,13 @@ function createBooks(books) {
   const delBtn = document.querySelectorAll('.delete');
 
   delBtn.forEach((del) => {
+    let delIndex = del.attributes['data-ref'].value;
     del.addEventListener('click', () => {
-      del.parentElement.parentElement.style.display = 'none';
+      myLibrary.splice(delIndex, 1);
+      del.parentElement.parentElement.style.opacity = 0;
+      setTimeout(() => {
+        del.parentElement.parentElement.remove();
+      }, 150);
     });
   });
 }
@@ -79,7 +84,7 @@ openModal.addEventListener('click', () => {
   modal.showModal();
 });
 
-/* Submit the form */
+/* Submit the form and create the book */
 const form = document.querySelector('form');
 form.addEventListener('submit', () => {
   const optionStatus = document.querySelector('#readYes:checked');
