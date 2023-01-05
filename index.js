@@ -1,3 +1,4 @@
+/* To do..incorporate Book constructor in the app */
 /* Create a book constructor */
 function Book(title, author, pageNo, readTheBook = false) {
   this.title = title;
@@ -40,7 +41,7 @@ const main = document.querySelector('main');
 function createBooks(books) {
   let booksLibrary = '';
   books.map(
-    (book) =>
+    (book, index) =>
       (booksLibrary += `<article class="card">
           <div class="box">
             <h3 class="title">${book.title}</h3>
@@ -51,13 +52,50 @@ function createBooks(books) {
             }>${
         book.readTheBook ? 'Finished Reading' : 'Not Finished Reading'
       }</button>
-            <button class="delete">Delete Book</button>
+            <button data-ref= ${index} class="delete">Delete Book</button>
           </div>
       </article>`)
   );
+
   main.innerHTML = booksLibrary;
+
+  //Add function to readButton
+
+  const cards = document.querySelectorAll('.card');
+
+  cards.forEach((card, index) => {
+    let readBtnStatus = card.querySelector('.box button:first-of-type');
+    readBtnStatus.addEventListener('click', function () {
+      if (myLibrary[index].readTheBook) {
+        myLibrary[index].readTheBook = false;
+        this.innerHTML = 'Not Finished Reading';
+        this.classList.toggle('readingStatusYes');
+      } else {
+        myLibrary[index].readTheBook = true;
+        this.innerHTML = 'Finished Reading';
+        this.classList.toggle('readingStatusYes');
+      }
+    });
+  });
+
+  /* Add script to delete button */
+
+  const delBtn = document.querySelectorAll('.delete');
+
+  delBtn.forEach((del) => {
+    let delIndex = del.attributes['data-ref'].value;
+    del.addEventListener('click', () => {
+      myLibrary.splice(delIndex, 1);
+      del.parentElement.parentElement.style.opacity = 0;
+      setTimeout(() => {
+        del.parentElement.parentElement.remove();
+      }, 150);
+    });
+  });
 }
+
 createBooks(myLibrary);
+
 /* Open the modal */
 const openModal = document.querySelector('.open-modal');
 const modal = document.querySelector('.modal');
@@ -67,7 +105,7 @@ openModal.addEventListener('click', () => {
   modal.showModal();
 });
 
-/* Submit the form */
+/* Submit the form and create the book */
 const form = document.querySelector('form');
 form.addEventListener('submit', () => {
   const optionStatus = document.querySelector('#readYes:checked');

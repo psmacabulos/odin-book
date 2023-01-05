@@ -20,10 +20,12 @@ html,
 body {
   height: 100%;
 }
+button {
+  cursor: pointer;
+}
 .container {
   min-height: 100%;
   display: grid;
-  /* grid-template-columns: 100%; */
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     'header header'
@@ -70,7 +72,7 @@ main article.card {
   box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
     inset -5px -5px 15px rgba(255, 255, 255, 0.1),
     5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
-  /* transition: 0.5s; */
+  transition: 0.3s linear;
   background-color: #f7f7f7a7;
 }
 main article.card .box {
@@ -83,19 +85,17 @@ main article.card .box {
 main article.card .box .title {
   font-size: 1.5rem;
 }
-button.readingStatusYes,
-button.readingStatusNo {
+.box button:first-of-type {
   border: none;
   padding: 2px 5px;
   border-radius: 2px;
   color: white;
-}
-button.readingStatusYes {
-  background-color: #9bc27f;
-}
-button.readingStatusNo {
   background-color: #c2b57f;
 }
+.box button:first-of-type.readingStatusYes {
+  background-color: #9bc27f;
+}
+
 button.delete {
   background-color: rgba(212, 49, 34, 0.838);
   border: none;
@@ -112,13 +112,14 @@ form {
 
 form h3 {
   margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
 form .input-box .details {
   display: flex;
   justify-content: space-between;
   column-gap: 50px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 form .input-box .optionBox {
@@ -153,9 +154,9 @@ footer p:last-child {
 }
 
 .modal {
+  margin: auto;
   max-width: 50ch;
-  padding: 1em;
-  vertical-align: middle;
+  padding: 2em;
 }
 
 .modal::backdrop {
