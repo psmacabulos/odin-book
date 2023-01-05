@@ -40,7 +40,7 @@ const main = document.querySelector('main');
 function createBooks(books) {
   let booksLibrary = '';
   books.map(
-    (book) =>
+    (book, index) =>
       (booksLibrary += `<article class="card">
           <div class="box">
             <h3 class="title">${book.title}</h3>
@@ -56,8 +56,20 @@ function createBooks(books) {
       </article>`)
   );
   main.innerHTML = booksLibrary;
+
+  /* Add script to delete button */
+
+  const delBtn = document.querySelectorAll('.delete');
+
+  delBtn.forEach((del) => {
+    del.addEventListener('click', () => {
+      del.parentElement.parentElement.style.display = 'none';
+    });
+  });
 }
+
 createBooks(myLibrary);
+
 /* Open the modal */
 const openModal = document.querySelector('.open-modal');
 const modal = document.querySelector('.modal');

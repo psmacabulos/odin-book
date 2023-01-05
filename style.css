@@ -20,6 +20,9 @@ html,
 body {
   height: 100%;
 }
+button {
+  cursor: pointer;
+}
 .container {
   min-height: 100%;
   display: grid;
