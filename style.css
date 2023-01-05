@@ -85,19 +85,17 @@ main article.card .box {
 main article.card .box .title {
   font-size: 1.5rem;
 }
-button.readingStatusYes,
-button.readingStatusNo {
+.box button:first-of-type {
   border: none;
   padding: 2px 5px;
   border-radius: 2px;
   color: white;
-}
-button.readingStatusYes {
-  background-color: #9bc27f;
-}
-button.readingStatusNo {
   background-color: #c2b57f;
 }
+.box button:first-of-type.readingStatusYes {
+  background-color: #9bc27f;
+}
+
 button.delete {
   background-color: rgba(212, 49, 34, 0.838);
   border: none;

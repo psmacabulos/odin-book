@@ -1,3 +1,4 @@
+/* To do..incorporate Book constructor in the app */
 /* Create a book constructor */
 function Book(title, author, pageNo, readTheBook = false) {
   this.title = title;
@@ -55,7 +56,27 @@ function createBooks(books) {
           </div>
       </article>`)
   );
+
   main.innerHTML = booksLibrary;
+
+  //Add function to readButton
+
+  const cards = document.querySelectorAll('.card');
+
+  cards.forEach((card, index) => {
+    let readBtnStatus = card.querySelector('.box button:first-of-type');
+    readBtnStatus.addEventListener('click', function () {
+      if (myLibrary[index].readTheBook) {
+        myLibrary[index].readTheBook = false;
+        this.innerHTML = 'Not Finished Reading';
+        this.classList.toggle('readingStatusYes');
+      } else {
+        myLibrary[index].readTheBook = true;
+        this.innerHTML = 'Finished Reading';
+        this.classList.toggle('readingStatusYes');
+      }
+    });
+  });
 
   /* Add script to delete button */
 
